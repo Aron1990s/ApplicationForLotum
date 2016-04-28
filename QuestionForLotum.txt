@@ -1,0 +1,153 @@
+	/**
+	 * Question 1 Write a function that prints the numbers from 1 to 100. But
+	 * for multiples of three print ¡°Foo¡± instead of the number and for the
+	 * multiples of five print ¡°Bar¡±. For numbers which are multiples of both
+	 * three and five print ¡°FooBar¡±.
+	 */
+	public void addFooBar() {
+		final String FOO = "Foo";
+		final String Bar = "Bar";
+		final String FOOBAR = "FooBar";
+		for (int i = 1; i <= 100; i++) {
+			if (i == 100) {
+				// If i=100, no space is needed
+				System.out.println(Bar);
+			} else if (i % 15 == 0) {
+				System.out.print(FOOBAR + " ");
+			} else if (i % 3 == 0) {
+				System.out.print(FOO + " ");
+			} else if (i % 5 == 0) {
+				System.out.print(Bar + " ");
+			} else {
+				System.out.print(i + " ");
+			}
+		}
+	}
+
+	/**
+	 * Question 2 Write a function that counts the number of even numbers that
+	 * appear in a range of integers 0..n, where n is supplied as the sole
+	 * argument to your function.
+	 */
+	public void countEvenNum(int n) {
+		if (n % 2 == 0) {
+			System.out.println((n / 2) + 1);
+		} else {
+			System.out.println((n + 1) / 2);
+		}
+	}
+
+	/**
+	 * Question 3 Given the following pseudo code, determine the range of
+	 * possible values for ¡°a¡± in your language of choice: 
+	 * x = random_int(1,6) 
+	 * y = random_int(1,6) 
+	 * z = random_int(1,6) 
+	 * a = x + y + z.
+	 */
+	public void countRange() {
+		int[] x = { 1, 2, 3, 4, 5, 6 };
+		int[] y = { 2, 1, 4, 3, 6, 5 };
+		int[] z = { 4, 6, 2, 3, 1, 5 };
+		// Sort x,y,and z
+		Arrays.sort(x);
+		Arrays.sort(y);
+		Arrays.sort(z);
+		// Find min and max sum
+		int minSum = x[0] + y[0] + z[0];
+		int maxSum = x[5] + y[5] + z[5];
+		System.out.println("Range is " + "from " + minSum + " to " + maxSum);
+	}
+
+	/**
+	 * Question 4 words = ['one', 'one', 'two', 'three', 'three', 'two'] 
+	 * Remove the duplicates.
+	 */
+	public void removeDup() {
+		String[] words = { "one", "one", "two", "three", "three", "two" };
+		List<String> list = new LinkedList<String>();
+		for (int i = 0; i < words.length; i++) {
+			if (!list.contains(words[i])) {
+				list.add(words[i]);
+			}
+		}
+
+		words = list.toArray(new String[list.size()]);
+		// Print words
+		if (words != null && words.length > 0) {
+			for (int i = 0; i < words.length; i++) {
+				if (i == words.length - 1) {
+					System.out.print(words[i] + " ");
+					System.out.println();
+				} else {
+					System.out.print(words[i] + " ");
+				}
+			}
+		}
+	}
+
+	/**
+	 * Question 5 Print to stdout the following output using only one loop: 
+	 * 1 1 1 1 1 
+	 * 2 2 2 2 2 
+	 * 3 3 3 3 3 
+	 * 4 4 4 4 4 
+	 * 5 5 5 5 5
+	 */
+	public void priByOneLoop() {
+		int count = 1;
+		int countForLn = 1;
+		while (count <= 5) {
+			System.out.print(count);
+			countForLn++;
+			if (countForLn > 5) {
+				System.out.println();
+				count++;
+				countForLn = 1;
+			}
+		}
+	}
+
+	/**
+	 * Question 6 Write a method that finds the largest sum of consecutive
+	 * entries in an array given a group size. It should take an array and the
+	 * interval size as inputs and should return both the largest sum and the
+	 * index of the first entry in the group.
+	 */
+	public int[] getSumAndIndex(int[] array, int groupSize) {
+		if (array.length == 0 || array == null) {
+			return null;
+		}
+		if (array.length % groupSize != 0) {
+			System.out.println("Please input correct group size");
+			return null;
+		}
+		int[] result = new int[2];
+		int length = array.length / groupSize;
+		int[] sumArray = new int[length];
+		int[] cloneSumArray;
+		int coArray = 0;
+		// Get each sum by the given group size
+		for (int i = 1; i <= length; i++) {
+			for (int count = 0; count < groupSize; count++) {
+				sumArray[i - 1] = sumArray[i - 1] + array[coArray++];
+			}
+		}
+		// Clone a result for sorting
+		cloneSumArray = sumArray.clone();
+		Arrays.sort(cloneSumArray);
+		// Get the max number
+		int maxNum = cloneSumArray[length - 1];
+		// Find the index
+		for (int i = 0; i < length; i++) {
+			if (sumArray[i] == maxNum) {
+				int index = i;
+				result[0] = maxNum;
+				System.out.print("MaxNum: " + result[0]);
+				result[1] = index * groupSize;
+				System.out.print(" FirstEntry: " + result[1]);
+				break;
+			}
+		}
+		return result;
+	}
