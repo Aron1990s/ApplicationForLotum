@@ -35,18 +35,18 @@ public class QuestionForLotum {
 	 */
 	public void addFooBar() {
 		final String FOO = "Foo";
-		final String Bar = "Bar";
+		final String BAR = "Bar";
 		final String FOOBAR = "FooBar";
 		for (int i = 1; i <= 100; i++) {
 			if (i == 100) {
 				// If i=100, no space is needed
-				System.out.println(Bar);
+				System.out.println(BAR);
 			} else if (i % 15 == 0) {
 				System.out.print(FOOBAR + " ");
 			} else if (i % 3 == 0) {
 				System.out.print(FOO + " ");
 			} else if (i % 5 == 0) {
-				System.out.print(Bar + " ");
+				System.out.print(BAR + " ");
 			} else {
 				System.out.print(i + " ");
 			}
